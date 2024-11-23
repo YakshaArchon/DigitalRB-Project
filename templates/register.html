@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join LinkedIn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background: #FE396A;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #FE396A;
+        }
+        .terms {
+            font-size: 12px;
+            margin-top: 10px;
+            color: #555;
+            text-align: left;
+        }
+        .terms a {
+            color: #0072b1;
+            text-decoration: none;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #aaa;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+            margin: 0 10px;
+        }
+        .signin {
+            font-size: 14px;
+        }
+        .signin a {
+            color: #0072b1;
+            text-decoration: none;
+        }
+        .flash-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Join DigitalRB</h2>
+
+        <!-- Flash messages for errors or success -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="/register" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First name</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last name</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password (6 or more characters)</label>
+                <input type="password" id="password" name="password" minlength="6" required>
+            </div>
+            <button type="submit" class="btn">Agree & Join</button>
+        </form>
+        <div class="terms">
+            By clicking Agree & Join, you agree to the LinkedIn 
+            <a href="#">User Agreement</a>, <a href="#">Privacy Policy</a>, and 
+            <a href="#">Cookie Policy</a>.
+        </div>
+        <div class="divider">Or</div>
+        <div class="signin">
+            Already on DigitalRB? <a href="/log">Sign in</a>
+        </div>
+    </div>
+</body>
+</html>
