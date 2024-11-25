@@ -8,45 +8,32 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Here are the suitable jobs based on your resume</h1>
+        <h1 class="text-center mb-4">Here are the suitable jobs based on your resume</h1>
 
         {% if jobs %}
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Job Title</th>
-                            <th>Company Name</th>
-                            <th>Location</th>
-                            <th>Salary Range</th>
-                            <th>Job Type</th>
-                            <th>Posted Date</th>
-                            <th>Closing Date</th>
-                            <th>Suitability</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for job in jobs %}
-                        <tr>
-                            <td>{{ job.job_title }}</td>
-                            <td>{{ job.company_name }}</td>
-                            <td>{{ job.location }}</td>
-                            <td>{{ job.salary_min }} - {{ job.salary_max }}</td>
-                            <td>{{ job.job_type }}</td>
-                            <td>{{ job.posted_date }}</td>
-                            <td>{{ job.closing_date }}</td>
-                            <td>{{ job.suitability_score }}%</td>
-                            <td>
-                                <a href="{{ url_for('job_details', job_id=job.job_id) }}" class="btn btn-primary">View Details</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="row g-4">
+                {% for job in jobs %}
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ job.job_title }}</h5>
+                            <h6 class="card-subtitle text-muted">{{ job.company_name }}</h6>
+                            <p class="card-text mt-3">
+                                <strong>Location:</strong> {{ job.location }}<br>
+                                <strong>Salary:</strong> {{ job.salary_min }} - {{ job.salary_max }}<br>
+                                <strong>Type:</strong> {{ job.job_type }}<br>
+                                <strong>Posted:</strong> {{ job.posted_date }}<br>
+                                <strong>Closing:</strong> {{ job.closing_date }}<br>
+                                <strong>Suitability:</strong> {{ job.suitability_score }}%
+                            </p>
+                            <a href="{{ url_for('job_details', job_id=job.job_id) }}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         {% else %}
-            <div class="alert alert-info">No jobs found matching your CV.</div>
+            <div class="alert alert-info text-center">No jobs found matching your CV.</div>
         {% endif %}
     </div>
 </body>
