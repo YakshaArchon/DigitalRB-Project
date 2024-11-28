@@ -8,74 +8,191 @@
     <title>Job Listings</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/styles.css">
 </head>
 
 <body>
-
-        <!-- Header Start -->
-        <div class="header-area header-transparrent">
-            <div class="headder-top header-sticky">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-2">
-                            <!-- Logo -->
-                            <div class="logo">
-                                <a href="index"><img src="static/img/logo/logo.png" alt=""></a>
+    <!-- Header Start -->
+    <div class="header-area header-transparrent">
+        <div class="headder-top header-sticky">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-2">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a href="index"><img src="static/img/logo/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9">
+                        <div class="menu-wrapper">
+                            <!-- Main-menu -->
+                            <div class="main-menu">
+                                <nav class="d-none d-lg-block">
+                                    <ul id="navigation">
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="job_listing">Find a Jobs</a></li>
+                                        <li><a href="about">About</a></li>
+                                        <li><a href="post_job">Post a Job</a></li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-9">
-                            <div class="menu-wrapper">
-                                <!-- Main-menu -->
-                                <div class="main-menu">
-                                    <nav class="d-none d-lg-block">
-                                        <ul id="navigation">
-                                            <li><a href="index">Home</a></li>
-                                            <li><a href="job_listing">Find a Jobs </a></li>
-                                            <li><a href="about">About</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-
-    <!-- Job Listings Section -->
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Available Job Listings</h2>
-
-        {% if jobs %}
-        <div class="row">
-            {% for job in jobs %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ job.job_title }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ job.company_name }}</h6>
-                        <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
-                        <p class="card-text"><strong>Job Type:</strong> {{ job.job_type }}</p>
-                        <p class="card-text"><strong>Salary:</strong> ${{ job.salary_min }} - ${{ job.salary_max }}</p>
-                        <p class="card-text"><strong>Posted Date:</strong> {{ job.posted_date }}</p>
-                        <p class="card-text"><strong>Closing Date:</strong> {{ job.closing_date }}</p>
-                        <a href="{{ url_for('job_details', job_id=job['job_id']) }}" class="btn">View Details</a>
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        {% else %}
-        <p>No job listings available at the moment.</p>
-        {% endif %}
     </div>
+    <!-- Header End -->
 
-    <!-- Footer -->
+    <!-- Job List Area Start -->
+    <div class="job-listing-area pt-120 pb-120">
+        <div class="container">
+            <div class="row">
+                <!-- Left content -->
+                <div class="col-xl-3 col-lg-3 col-md-4">
+                    <!-- Job Category Listing start -->
+                    <div class="job-category-listing mb-50">
+                        <!-- single one -->
+                        <div class="single-listing">
+                            <div class="small-section-tittle2">
+                                <h4>Filter Jobs</h4>
+                            </div>
+                            <form method="get" action="{{ url_for('job_listing') }}">
+                                <!-- Job Category -->
+                                <div class="select-job-items2">
+                                    <select name="category">
+                                        <option value="">All Category</option>
+                                        <option value="Category 1">Category 1</option>
+                                        <option value="Category 2">Category 2</option>
+                                        <option value="Category 3">Category 3</option>
+                                    </select>
+                                </div>
+
+                                <!-- Job Type -->
+                                <div class="select-Categories pt-80 pb-50">
+                                    <div class="small-section-tittle2">
+                                        <h4>Job Type</h4>
+                                    </div>
+                                    <label class="container">Full Time
+                                        <input type="checkbox" name="job_type" value="Full Time">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Part Time
+                                        <input type="checkbox" name="job_type" value="Part Time">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Remote
+                                        <input type="checkbox" name="job_type" value="Remote">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Freelance
+                                        <input type="checkbox" name="job_type" value="Freelance">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <!-- Job Location -->
+                                <div class="select-job-items2">
+                                    <select name="location">
+                                        <option value="">Anywhere</option>
+                                        <option value="Location 1">Location 1</option>
+                                        <option value="Location 2">Location 2</option>
+                                    </select>
+                                </div>
+
+                                <!-- Experience -->
+                                <div class="select-Categories pt-80 pb-50">
+                                    <div class="small-section-tittle2">
+                                        <h4>Experience</h4>
+                                    </div>
+                                    <label class="container">1-2 Years
+                                        <input type="checkbox" name="experience" value="1-2 Years">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">2-3 Years
+                                        <input type="checkbox" name="experience" value="2-3 Years">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <!-- Posted Within -->
+                                <div class="select-Categories pt-80 pb-50">
+                                    <div class="small-section-tittle2">
+                                        <h4>Posted Within</h4>
+                                    </div>
+                                    <label class="container">Today
+                                        <input type="checkbox" name="posted_within" value="1">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Last 3 Days
+                                        <input type="checkbox" name="posted_within" value="3">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Last 7 Days
+                                        <input type="checkbox" name="posted_within" value="7">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right content -->
+                <div class="col-xl-9 col-lg-9 col-md-8">
+                    <!-- Featured_job_start -->
+                    <section class="featured-job-area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="count-job mb-35">
+                                        <span>{{ jobs|length }} Jobs found</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Single Job Listings -->
+                            {% for job in jobs %}
+                            <div class="single-job-items mb-30">
+                                <div class="job-items">
+                                    <div class="company-img">
+                                        <a href="#"><img src="static/img/icon/job-list1.png" alt=""></a>
+                                    </div>
+                                    <div class="job-tittle job-tittle2">
+                                        <a href="{{ url_for('job_details', job_id=job['job_id']) }}">
+                                            <h4>{{ job.job_title }}</h4>
+                                        </a>
+                                        <ul>
+                                            <li>{{ job.company_name }}</li>
+                                            <li><i class="fas fa-map-marker-alt"></i> {{ job.location }}</li>
+                                            <li>${{ job.salary_min }} - ${{ job.salary_max }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="items-link items-link2 f-right">
+                                    <a href="{{ url_for('job_details', job_id=job['job_id']) }}">View Details</a>
+                                    <span>{{ job.posted_date }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                    <!-- Featured_job_end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Job List Area End -->
+
+    <!-- Footer Start -->
     <footer class="bg-light text-center py-4">
         <p>&copy; 2024 DigitalRB. All rights reserved.</p>
     </footer>
 
     <script src="static/js/jquery-3.5.1.min.js"></script>
     <script src="static/js/bootstrap.bundle.min.js"></script>
-        <!-- Jquery Mobile Menu -->
     <script src="./static/js/jquery.slicknav.min.js"></script>
 </body>
 

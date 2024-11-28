@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Post a Job</h2>
+        <form action="{{ url_for('post_job') }}" method="POST">
+            <div class="form-group">
+                <label for="job_title">Job Title</label>
+                <input type="text" class="form-control" id="job_title" name="job_title" required>
+            </div>
+            <div class="form-group">
+                <label for="job_description">Job Description</label>
+                <textarea class="form-control" id="job_description" name="job_description" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="job_type">Job Type</label>
+                <input type="text" class="form-control" id="job_type" name="job_type" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="salary_min">Minimum Salary</label>
+                <input type="number" class="form-control" id="salary_min" name="salary_min" required>
+            </div>
+            <div class="form-group">
+                <label for="salary_max">Maximum Salary</label>
+                <input type="number" class="form-control" id="salary_max" name="salary_max" required>
+            </div>
+            <div class="form-group">
+                <label for="posted_date">Posted Date</label>
+                <input type="date" class="form-control" id="posted_date" name="posted_date" required>
+            </div>
+            <div class="form-group">
+                <label for="closing_date">Closing Date</label>
+                <input type="date" class="form-control" id="closing_date" name="closing_date" required>
+            </div>
+            <div class="form-group">
+                <label for="company_name">Company Name</label>
+                <input type="text" class="form-control" id="company_name" name="company_name" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Job</button>
+        </form>
+    </div>
+
+    <script src="static/js/jquery-1.12.4.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+ 
